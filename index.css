@@ -1,0 +1,178 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ─── TaxAce Brand Tokens ─────────────────────────────────────────────────── */
+:root {
+  /* Brand */
+  --brand-teal: oklch(0.62 0.13 175);
+  --brand-teal-dark: oklch(0.52 0.13 175);
+  --brand-teal-light: oklch(0.92 0.05 175);
+  --brand-charcoal: oklch(0.38 0.01 260);
+  --brand-charcoal-light: oklch(0.55 0.01 260);
+
+  /* Radius */
+  --radius: 0.5rem;
+
+  /* Semantic color tokens (light theme) */
+  --background: oklch(0.98 0 0);
+  --foreground: oklch(0.18 0.01 260);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.18 0.01 260);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.18 0.01 260);
+  --primary: oklch(0.62 0.13 175);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.94 0.01 260);
+  --secondary-foreground: oklch(0.38 0.01 260);
+  --muted: oklch(0.96 0.005 260);
+  --muted-foreground: oklch(0.55 0.01 260);
+  --accent: oklch(0.92 0.05 175);
+  --accent-foreground: oklch(0.38 0.01 260);
+  --destructive: oklch(0.58 0.22 27);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.90 0.005 260);
+  --input: oklch(0.90 0.005 260);
+  --ring: oklch(0.62 0.13 175);
+
+  /* Sidebar */
+  --sidebar: oklch(0.20 0.01 260);
+  --sidebar-foreground: oklch(0.90 0.005 260);
+  --sidebar-primary: oklch(0.62 0.13 175);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.28 0.01 260);
+  --sidebar-accent-foreground: oklch(0.95 0.005 260);
+  --sidebar-border: oklch(0.28 0.01 260);
+  --sidebar-ring: oklch(0.62 0.13 175);
+
+  /* Status badge colors — 8 clearly distinct hues */
+  --status-in-vault:      oklch(0.45 0.14 185);  /* Dark teal (deep, brand-adjacent) */
+  --status-contacted:     oklch(0.55 0.18 220);  /* Sky blue (light, airy) */
+  --status-scheduled:     oklch(0.50 0.20 300);  /* Purple (kept) */
+  --status-prepped:       oklch(0.62 0.16 65);   /* Amber/gold (warm, clearly ≠ sky blue) */
+  --status-picked-up:     oklch(0.48 0.18 145);  /* Rich emerald green (clearly ≠ dark teal) */
+  --status-prep-to-shred: oklch(0.60 0.18 45);   /* Orange (kept) */
+  --status-shredded:      oklch(0.50 0.20 25);   /* Red (kept) */
+  --status-hold:          oklch(0.50 0.01 260);  /* Slate gray (neutral, clearly ≠ amber) */
+
+  /* Easing */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --radius-xl: calc(var(--radius) + 6px);
+  --font-sans: "Inter", system-ui, sans-serif;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+  .flex {
+    min-width: 0;
+    min-height: 0;
+  }
+  .container {
+    @apply mx-auto px-4;
+  }
+  button:active {
+    transform: scale(0.97);
+    transition: transform 160ms var(--ease-out);
+  }
+}
+
+/* ─── Status Badge Utilities ─────────────────────────────────────────────── */
+.status-badge {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+}
+/* In Vault — Teal (brand color) */
+.status-in-vault {
+  background-color: oklch(0.90 0.07 195);
+  color: oklch(0.32 0.14 195);
+}
+/* Contacted — Blue */
+.status-contacted {
+  background-color: oklch(0.90 0.07 260);
+  color: oklch(0.32 0.16 260);
+}
+/* Scheduled — Purple */
+.status-scheduled {
+  background-color: oklch(0.91 0.07 300);
+  color: oklch(0.34 0.18 300);
+}
+/* Prepped — Amber/gold */
+.status-prepped {
+  background-color: oklch(0.93 0.09 65);
+  color: oklch(0.40 0.16 65);
+}
+/* Picked Up — Emerald green (clearly distinct from teal) */
+.status-picked-up {
+  background-color: oklch(0.90 0.10 145);
+  color: oklch(0.30 0.16 145);
+}
+/* Prepped for Mail — Amber/gold (same as Prepped for Pickup) */
+.status-prepped-mail {
+  background-color: oklch(0.93 0.09 65);
+  color: oklch(0.40 0.16 65);
+}
+/* Mailed — Emerald green (same as Picked Up) */
+.status-mailed {
+  background-color: oklch(0.90 0.10 145);
+  color: oklch(0.30 0.16 145);
+}
+/* Prep to Shred — Orange */
+.status-prep-to-shred {
+  background-color: oklch(0.93 0.09 45);
+  color: oklch(0.40 0.18 45);
+}
+/* Shredded — Red */
+.status-shredded {
+  background-color: oklch(0.92 0.08 25);
+  color: oklch(0.36 0.18 25);
+}
+/* Hold — Slate gray */
+.status-hold {
+  background-color: oklch(0.92 0.005 260);
+  color: oklch(0.40 0.01 260);
+}
+
+/* ─── Sidebar Overrides ──────────────────────────────────────────────────── */
+[data-sidebar="sidebar"] {
+  background-color: var(--sidebar) !important;
+  color: var(--sidebar-foreground) !important;
+}
